@@ -8,3 +8,12 @@ DAY_CHOICES = (
     (6, "Sunday")
 )
 
+BITWISE_DAY_CHOICES = (
+    (1, "Sun","Sunday"),
+    (2, "Mon","Monday"),
+    (4, "Tue","Tuesday"),
+    (8, "Wed","Wednesday"),
+    (16, "Thu","Thursday"),
+    (32, "Fri","Friday"),
+    (64, "Sat","Saturday"),
+)
