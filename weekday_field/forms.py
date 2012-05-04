@@ -28,5 +28,8 @@ class BitwiseWeekdayFormField(WeekdayFormField):
 
   def clean(self,value):
     value = [int(x) for x in value]
-    value = reduce(operator.or_, value)
+    if len(value) != 0:
+      value = reduce(operator.or_, value)
+    else:
+      value = 0
     return value
