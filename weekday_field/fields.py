@@ -33,7 +33,7 @@ class WeekdayField(models.CommaSeparatedIntegerField):
 
     def get_db_prep_value(self, value, connection=None, prepared=False):
         return ",".join([str(x) for x in value])
-    
+
 try:
     from south.modelsinspector import add_introspection_rules
     add_introspection_rules([], ['^weekday_field\.fields\.WeekdayField'])
