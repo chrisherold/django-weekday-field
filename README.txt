@@ -14,3 +14,5 @@ Usage:
     class MyModel(models.Model):
         weekdays = weekday_field.fields.WeekdayField()
 
+
+There is also a BitwiseWeekdayFormField, contributed by Andrew Gall <housepage@gmail.com>, which stores the data in a single integer.
