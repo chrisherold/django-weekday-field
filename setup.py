@@ -10,6 +10,9 @@ setup(
     packages = [
         "weekday_field",
     ],
+    package_data = {
+        '': ['static/weekday_field/js/*.js'],
+    },
     classifiers = [
         'Programming Language :: Python',
         'License :: OSI Approved :: BSD License',
