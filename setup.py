@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name = "django-weekday-field",
-    version = "1.0",
+    version = "1.0.1",
     description = "Weekday field for django models",
     url = "http://bitbucket.org/schinckel/django-weekday-field/",
     author = "Matthew Schinckel",
