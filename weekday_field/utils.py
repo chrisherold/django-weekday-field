@@ -17,3 +17,9 @@ BITWISE_DAY_CHOICES = (
     (32, "F","Friday"),
     (64, "Sa","Saturday"),
 )
+
+ADVANCED_DAY_CHOICES = (
+    (None, "Any day"),
+    ("0,1,2,3,4", "Weekdays"),
+    ("5,6", "Weekends"),
+) + DAY_CHOICES
