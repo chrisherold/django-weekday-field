@@ -32,7 +32,7 @@ class WeekdayField(models.CommaSeparatedIntegerField):
         return value
 
     def get_db_prep_value(self, value, connection=None, prepared=False):
-        return ",".join([str(x) for x in value])
+        return ",".join([str(x) for x in value or []])
 
 try:
     from south.modelsinspector import add_introspection_rules
