@@ -11,7 +11,7 @@ setup(
         "weekday_field",
     ],
     package_data = {
-        '': ['static/weekday_field/js/*.js'],
+        '': ['static/*/*/*'],
     },
     classifiers = [
         'Programming Language :: Python',
