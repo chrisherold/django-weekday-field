@@ -16,6 +16,9 @@ class ToggleCheckboxes(CheckboxSelectMultiple):
             value.append('0,1,2,3,4')
         if 5 in value and 6 in value:
             value.append('5,6')
+        if 'class' not in attrs:
+            attrs['class'] = ""
+        attrs['class'] += " advanced-weekday-field"
         result = super(ToggleCheckboxes, self).render(name, value, attrs)
         result = result.replace(
             " Weekends</label></li>", 
