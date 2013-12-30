@@ -26,7 +26,7 @@ class WeekdayField(models.CommaSeparatedIntegerField):
     def to_python(self, value):
         if isinstance(value, basestring):
             if value:
-                value = [int(x) for x in value.split(',') if x]
+                value = [int(x) for x in value.strip('[]').split(',') if x]
             else:
                 value = []
         return value
