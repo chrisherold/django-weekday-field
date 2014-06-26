@@ -2,6 +2,8 @@
 django-weekday-field
 =====================
 
+ |status|
+
 A field that encapsulates the handling of selection of 0 or more weekday choices.
 
 Uses Django's CommaSeparatedIntegerField internally.
@@ -17,3 +19,6 @@ Usage:
 
 
 There is also a BitwiseWeekdayFormField, contributed by Andrew Gall <housepage@gmail.com>, which stores the data in a single integer.
+
+
+.. |status| image:: https://drone.io/bitbucket.org/schinckel/django-weekday-field/status.png
