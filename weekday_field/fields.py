@@ -41,5 +41,3 @@ except ImportError:
     pass
 else:
     add_introspection_rules([], ['^weekday_field\.fields\.WeekdayField'])
-except ImportError:
-    pass
