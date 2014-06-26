@@ -4,7 +4,7 @@ README = open('README.txt').read()
 
 setup(
     name = "django-weekday-field",
-    version = "1.0.4",
+    version = "1.1.0",
     description = "Weekday field for django models",
     url = "http://bitbucket.org/schinckel/django-weekday-field/",
     author = "Matthew Schinckel",
