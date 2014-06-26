@@ -27,7 +27,7 @@ class WeekdayField(models.CommaSeparatedIntegerField):
     def to_python(self, value):
         if utils.is_str(value):
             if value:
-                value = [int(x) for x in value.split(',') if x]
+                value = [int(x) for x in value.strip('[]').split(',') if x]
             else:
                 value = []
         return value
@@ -41,3 +41,5 @@ except ImportError:
     pass
 else:
     add_introspection_rules([], ['^weekday_field\.fields\.WeekdayField'])
+except ImportError:
+    pass
