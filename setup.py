@@ -1,4 +1,6 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
+
+README = open('README.txt').read()
 
 setup(
     name = "django-weekday-field",
@@ -7,9 +9,7 @@ setup(
     url = "http://bitbucket.org/schinckel/django-weekday-field/",
     author = "Matthew Schinckel",
     author_email = "matt@schinckel.net",
-    packages = [
-        "weekday_field",
-    ],
+    packages = find_packages(),
     package_data = {
         '': ['static/*/*/*'],
     },
@@ -19,4 +19,7 @@ setup(
         'Operating System :: OS Independent',
         'Framework :: Django',
     ],
-)
+    install_requires=["Django"],
+    tests_require=["Django"],
+    test_suite="runtests.runtests",
+    )

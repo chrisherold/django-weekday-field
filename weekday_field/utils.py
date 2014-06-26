@@ -19,7 +19,13 @@ BITWISE_DAY_CHOICES = (
 )
 
 ADVANCED_DAY_CHOICES = (
-    (None, "Any day"),
+    ("0,1,2,3,4,5,6", "Any day"),
     ("0,1,2,3,4", "Weekdays"),
     ("5,6", "Weekends"),
 ) + DAY_CHOICES
+
+def is_str(obj):
+    try:
+        return isinstance(obj, basestring)
+    except NameError:
+        return isinstance(obj, str)
