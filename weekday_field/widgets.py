@@ -30,8 +30,5 @@ class ToggleCheckboxes(CheckboxSelectMultiple):
         return mark_safe(result)
 
     def value_from_datadict(self, data, files, name):
-        value = data.get(name, "None")
-        if 'None' in value:
-            return ""
-        value = set([x for sub in value for x in sub.split(',')])
-        return ",".join(sorted(value))
+        value = super(ToggleCheckboxes, self).value_from_datadict(data, files, name)
+        return sorted(set([x for sub in value for x in sub.split(',')]))
