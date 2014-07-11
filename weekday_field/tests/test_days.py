@@ -166,7 +166,7 @@ class TestToggleCheckboxes(TestCase):
         f = ToggleCheckboxes(choices=ADVANCED_DAY_CHOICES)
         self.assertEqual(
             [],
-            f.value_from_datadict(QueryDict(), {}, "test"),
+            f.value_from_datadict(QueryDict(""), {}, "test"),
             )
         self.assertEqual(
             [''],
