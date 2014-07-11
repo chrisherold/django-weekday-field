@@ -2,13 +2,15 @@
 import functools
 import operator
 
+from django.http.request import QueryDict
 from django.forms import ValidationError
 from django.test import TestCase
 
 from weekday_field.fields import WeekdayField
 from weekday_field.forms import WeekdayFormField, AdvancedWeekdayFormField, \
      BitwiseWeekdayFormField
-from weekday_field.utils import DAY_CHOICES, BITWISE_DAY_CHOICES
+from weekday_field.utils import DAY_CHOICES, BITWISE_DAY_CHOICES, \
+     ADVANCED_DAY_CHOICES
 from weekday_field.widgets import ToggleCheckboxes
 
 class TestWeekdayField(TestCase):
@@ -25,9 +27,14 @@ class TestWeekdayFormField(TestCase):
 
     def test_field(self):
         f = WeekdayFormField()
-        self.assertEqual([str(i) for i in self.days], f.clean(self.days))
-        self.assertEqual([str(i) for i in self.days],
-                         f.clean(",".join([str(i) for i in self.days])))
+        self.assertEqual(
+            [str(i) for i in self.days],
+            f.clean(self.days),
+            )
+        self.assertEqual(
+            [str(i) for i in self.days],
+            f.clean([str(i) for i in self.days]),
+            )
         self.assertRaisesMessage(
             ValidationError,
             "'Select a valid choice. -1 is not one of the available choices.'",
@@ -48,12 +55,12 @@ class TestWeekdayAdvancedFormField(TestCase):
             ([], "Any day"),
             ]
         for expected, choice in choices:
-            value = [i[0] for i in f.choices if i[1] == choice][0]
+            value = [i[0].split(",") for i in f.choices if i[1] == choice][0]
             self.assertEqual([str(i) for i in expected], f.clean(value))
 
 class TestWeekdayBitwiseFormField(TestCase):
     def test_field(self):
-        f = BitwiseWeekdayFormField()
+        f = BitwiseWeekdayFormField(required=False)
         value = [i[0] for i in BITWISE_DAY_CHOICES]
         self.assertEqual(functools.reduce(operator.or_, value),
                          f.clean([str(i) for i in value]))
@@ -156,7 +163,20 @@ class TestToggleCheckboxes(TestCase):
             )
 
     def test_value_from_datadict(self):
-        f = ToggleCheckboxes(choices=DAY_CHOICES)
-        self.assertEqual("", f.value_from_datadict({}, {}, "testing"))
-        self.assertEqual("", f.value_from_datadict({"testing": "None"}, {}, "testing"))
-        self.assertEqual("1,2,3", f.value_from_datadict({"testing": ["1", "2", "3"]}, {}, "testing"))
+        f = ToggleCheckboxes(choices=ADVANCED_DAY_CHOICES)
+        self.assertEqual(
+            [],
+            f.value_from_datadict(QueryDict(), {}, "test"),
+            )
+        self.assertEqual(
+            [''],
+            f.value_from_datadict(QueryDict("test="), {}, "test"),
+            )
+        self.assertEqual(
+            ["1", "2", "3"],
+            f.value_from_datadict(QueryDict("test=1&test=2&test=3"), {}, "test"),
+            )
+        self.assertEqual(
+            ["1", "2", "3"],
+            f.value_from_datadict(QueryDict("test=1,2,3"), {}, "test"),
+            )
