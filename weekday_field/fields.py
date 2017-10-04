@@ -6,13 +6,12 @@ from weekday_field import utils
 def validate_csv(data):
     return all([isinstance(i, int) for i in data])
 
-class WeekdayField(models.CommaSeparatedIntegerField):
+class WeekdayField(models.CharField):
     """
     Field to simplify the handling of a multiple choice of None->all days.
 
     Stores as CSInt.
     """
-    __metaclass__ = models.SubfieldBase
 
     description = "CSV Weekday Field"
     default_validators = [validate_csv]
